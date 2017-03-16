@@ -1,6 +1,6 @@
 #include "pc.h"
 #include <vector>
-#include <string.h>
+#include <string>
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -10,12 +10,10 @@
 #include <utility>
 #include <ext/hash_map>
 
-extern "C" {
 #include "R.h"
 #include "Rmath.h"
 #include "Rinternals.h"
 #include "Rdefines.h"
-}
 
 using namespace std;
 using namespace __gnu_cxx; 

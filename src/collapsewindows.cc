@@ -5,7 +5,7 @@
 #include "pc.h"
 #include <sstream>
 #include <string>
-#include <string.h>
+#include <string>
 #include <cstring>
 #include <stdexcept>
 #include <math.h>
@@ -16,12 +16,10 @@
 #include <list>
 #include <ext/hash_map>
 
-extern "C" {
 #include "R.h"
 #include "Rmath.h"
 #include "Rinternals.h"
 #include "Rdefines.h"
-}
 
 using namespace std;
 using namespace __gnu_cxx; 
