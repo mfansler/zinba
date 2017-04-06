@@ -122,7 +122,7 @@ covanal=function(file, formula, formulaE, formulaZ,i,loc, size){
 
 ########################################################################################
 #Modified from dredge.R in MuMIn package
-require(multicore)
+require(parallel)
 require(doMC)
 require(foreach)
 library(MASS)

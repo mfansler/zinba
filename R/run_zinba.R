@@ -187,12 +187,12 @@ run.zinba=function(filelist=NULL,formula=NULL,formulaE=NULL,formulaZ=NULL,
 				data=unlist(strsplit(params,";"))[i]
 				cat(paste("\nSpecified chromosome not found or specified, using", data,"\n"))
 			}
-			model=covariateselect(file=data, selection=selecttype,
+			models=covariateselect(file=data, selection=selecttype,
 					loc=paste(outfile_subpath,".model",sep=""),
 					covs=selectcovs, numProc=numProc, interaction=interaction)
-			formula=model[[1]]
-			formulaE=model[[2]]
-			formulaZ=model[[3]]
+			formula=models[[1]]
+			formulaE=models[[2]]
+			formulaZ=models[[3]]
 			cat("Background formula is:\n\t");print(formula);
 			cat("Enrichment formula is:\n\t");print(formulaE);
 			cat("Zero-inflated formula is:\n\t");print(formulaZ);
@@ -201,7 +201,7 @@ run.zinba=function(filelist=NULL,formula=NULL,formulaE=NULL,formulaZ=NULL,
 		 
 		#begin mixture regression (parallelized)
 	  if(rmc == TRUE && rdmc == TRUE && rfor == TRUE){
-			cat(paste("--------GETTING ENRICHED WINDOWS--------",as.character(Sys.time()),"\n\n")) 		
+			cat(paste("--------GETTING ENRICHED WINDOWS (parallel)--------",as.character(Sys.time()),"\n\n")) 		
 	    #registerDoMC(numProc)
 	  	#mcoptions <- list(preschedule = FALSE, set.seed = FALSE)
 	    #getDoParWorkers()
@@ -220,7 +220,7 @@ run.zinba=function(filelist=NULL,formula=NULL,formulaE=NULL,formulaZ=NULL,
 		  cat(paste("--------WINDOW ANALYSIS COMPLETE--------",as.character(Sys.time()),"\n\n"))		
 	  }else{
 		  #if parallelization fails due to lack of packages, resort to non-parallelized version
-		  cat(paste("--------GETTING ENRICHED WINDOWS--------",as.character(Sys.time()),"\n\n")) 	
+		  cat(paste("--------GETTING ENRICHED WINDOWS (serial)--------",as.character(Sys.time()),"\n\n")) 	
 	    winfiles = rep("", length(params))
 	    for(i in 1:length(params)){
 	       winfiles[i] <- zinba::getsigwindows2(file=params[i],formula=formula,formulaE=formulaE,
@@ -236,7 +236,7 @@ run.zinba=function(filelist=NULL,formula=NULL,formulaE=NULL,formulaZ=NULL,
 	    
 		if(refinepeaks==1){
 			#merge windows and refine regions		
-			cat(paste("--------MERGE WINDOWS AND REFINE PEAKS (no parallelization)--------",
+			cat(paste("--------MERGE WINDOWS AND REFINE PEAKS--------",
 						as.character(Sys.time()),"\n"))
 			getrefinedpeaks(winlist=winlist,basecountfile=basecountfile,bpout=bpout,peakout=peakout,
 					twoBit=twoBit,winSize=winSize,pWinSize=pWinSize,pquant=pquant,printFullOut=printFullOut,

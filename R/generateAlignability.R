@@ -71,7 +71,7 @@ generateAlignability=function(mapdir, outdir="", athresh=1, extension=0,
 				gzip(adjmapchr[i], overwrite=T, remove=TRUE)
 			}
 		}else{
-			suppressPackageStartupMessages(require(multicore))
+			suppressPackageStartupMessages(require(parallel))
 			suppressPackageStartupMessages(require(doMC))
 			suppressPackageStartupMessages(require(foreach)) 
 			registerDoMC(numProc)
